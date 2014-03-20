@@ -1,4 +1,4 @@
 gluon-ffmz-keys
 ===============
 
-ffmz gluon vpn keys
+Public Fastd Keys für Freifunk Mainz
