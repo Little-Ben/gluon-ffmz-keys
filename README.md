@@ -12,29 +12,31 @@
 
 ##Git
 
- # Create an passwordless shh-key: `~/.ssh/github_gw_rsa`
+ # Create an passwordless shh-key: `~/.ssh/github_vollhorst_rsa`
 
      # $ ssh-keygen -t rsa -b 4096
 
- # Add the public key to the __Vollhorst__ [User on GitHub](https://github.com/Vollhorst).
+ # Add the public key to the __Vollhorst__ [User on GitHub](https://github.com/Vollhorst) [ssh keys](https://github.com/settings/ssh), named after your Gateway
 
  # __Vollhorst__ is in [the _AutoCRON_ Group](https://github.com/orgs/Freifunk-Mainz/teams/autocron), members [are allowed to push](https://github.com/Freifunk-Mainz/gluon-ffmz-keys/settings/collaboration) here.
 
  # `~/.ssh/config`
 
-    #  Host github_gw
+    #  Host github_vollhorst
     #    User git
     #    Hostname github.com
     #    PreferredAuthentications publickey
-    #    IdentityFile ~/.ssh/github_gw_rsa
+    #    IdentityFile ~/.ssh/github_vollhorst_rsa
 
- # clone keys
+ # test key-connection with github
 
-    # $ git clone ssh://github_gw/Freifunk-Mainz/gluon-ffmz-keys /etc/fastd/mainzVPN/peers
+    # $ ssh github_vollhorst
+    # Hi Vollhorst! You've successfully authenticated, but GitHub does not provide shell access.
+    # Connection to github.com closed.
 
- # crontab
+ # clone keys repository
 
-    # */20 * * * * $HOME/bin/autoupdate_fastd_keys.sh
+    # $ git clone ssh://github_vollhorst/Freifunk-Mainz/gluon-ffmz-keys /etc/fastd/mainzVPN/peers
 
 ##Sync
 
@@ -48,7 +50,7 @@
     # GW_NAME="awesome gateway"
     #
     # # CONFIGURE THIS TO YOUR PEER DIRECTORY
-    # FASTD_PEERS=/etc/fastd/mainz/peers
+    # FASTD_PEERS=/etc/fastd/mainz_meshVPN/peers
     #
     # function getCurrentVersion() {
     #  # Get hash from latest revision
@@ -87,6 +89,10 @@
  # finally
 
     # $ chmod +x `~/bin/autoupdate_fastd_keys.sh`
+
+ # crontab
+
+    # */20 * * * * $HOME/bin/autoupdate_fastd_keys.sh >> /var/log/fastd/autoupdate_fastd_keys.cron 2>&1
 
 ##Usage
 
